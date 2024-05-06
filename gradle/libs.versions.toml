@@ -45,3 +45,25 @@ jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrains
 jetbrainsKotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
+[bundles]
+app = [
+    "dagger-hilt",
+]
+app-kapt = [
+    "dagger-hilt-compiler",
+]
+feature = [
+    "androidx-navigation-compose",
+    "androidx-navigation-compose-hilt",
+    "dagger-hilt",
+]
+feature-kapt = [
+    "dagger-hilt-compiler",
+]
+domain = []
+data = [
+    "dagger-hilt",
+]
+data-kapt = [
+    "dagger-hilt-compiler",
+]
