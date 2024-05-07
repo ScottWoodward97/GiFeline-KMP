@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packaging {
         resources {
@@ -52,6 +52,10 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":feature"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
     implementation(libs.bundles.app)
     kapt(libs.bundles.app.kapt)
