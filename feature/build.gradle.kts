@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.feature)
     kapt(libs.bundles.feature.kapt)
