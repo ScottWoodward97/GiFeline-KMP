@@ -38,5 +38,5 @@ dependencies {
 
     implementation(libs.bundles.data)
     kapt(libs.bundles.data.kapt)
-    testImplementation(libs.junit)
+    testImplementation(libs.bundles.test)
 }
