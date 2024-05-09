@@ -1,6 +1,6 @@
 [versions]
 agp = "8.3.2"
-kotlin = "1.9.21"
+kotlin = "1.9.0"
 coroutines = "1.8.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -18,6 +18,7 @@ hilt = "2.49"
 navigation = "2.7.7"
 retrofit = "2.11.0"
 moshi = "1.15.1"
+turbine = "1.1.0"
 
 [libraries]
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -52,6 +53,7 @@ retrofit-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", v
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -83,6 +85,10 @@ feature = [
 feature-kapt = [
     "dagger-hilt-compiler",
 ]
+feature-debug = [
+    "androidx-ui-tooling",
+    "androidx-ui-tooling-preview",
+]
 domain = [
     "kotlin",
     "coroutines-core",
@@ -109,4 +115,5 @@ test = [
     "assertJ",
     "coroutines-core", #needed for mockk
     "coroutines-test",
+    "turbine",
 ]

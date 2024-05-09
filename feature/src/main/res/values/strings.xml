@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Home -->
+    <string name="home_select_breed_action">Select Breed</string>
+
+    <!--Breed selector -->
+    <string name="breed_selector_alt_name_fmt">(%s)</string>
+
+</resources>

@@ -1,4 +1,4 @@
-package uk.co.sw.gifeline.ui.theme
+package uk.co.sw.gifeline.feature.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

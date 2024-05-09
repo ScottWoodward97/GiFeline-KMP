@@ -1,11 +1,13 @@
 package uk.co.sw.gifeline.feature.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
+import uk.co.sw.gifeline.feature.breedselector.BreedSelectorScreen
+import uk.co.sw.gifeline.feature.home.GiFelineHome
 
 @Composable
 fun GiFelineNavHost(
@@ -14,9 +16,10 @@ fun GiFelineNavHost(
 ){
     NavHost(
         navController = navController,
-        startDestination = "test",
+        startDestination = "home",
         modifier = modifier,
     ){
-        composable("test"){ Text("Test") }
+        composable("home"){ GiFelineHome(onNavigateToBreedSelector = { navController.navigate("breed") }) }
+        dialog("breed"){ BreedSelectorScreen({}) }
     }
 }

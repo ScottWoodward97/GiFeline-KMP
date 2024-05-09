@@ -45,11 +45,12 @@ dependencies {
     implementation(project(":domain"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.feature)
+    debugImplementation(libs.bundles.feature.debug)
     kapt(libs.bundles.feature.kapt)
+    testImplementation(libs.bundles.test)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
