@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.android.AndroidEntryPoint
 import uk.co.sw.gifeline.feature.navigation.GiFelineScreen
-import uk.co.sw.gifeline.ui.theme.GiFelineTheme
+import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @AndroidEntryPoint
 class GiFelineActivity : ComponentActivity() {
