@@ -9,7 +9,8 @@ class CatBreedMapper @Inject constructor() {
         return CatBreed(
             id = entity.id,
             name = entity.name,
-            altNames = entity.altNames?.split(", ").orEmpty(),
+            altNames = entity.altNames?.split(", ").orEmpty()
+                .filter { it.isNotBlank() },
         )
     }
 
