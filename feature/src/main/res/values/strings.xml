@@ -7,4 +7,8 @@
     <!--Breed selector -->
     <string name="breed_selector_alt_name_fmt">(%s)</string>
 
+    <!-- Error Screen -->
+    <string name="error_screen_message">Cat-astrophic Error!</string>
+    <string name="error_screen_retry_action">Try Again</string>
+
 </resources>

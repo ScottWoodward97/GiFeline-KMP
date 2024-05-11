@@ -8,15 +8,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +31,8 @@ import uk.co.sw.gifeline.feature.R
 import uk.co.sw.gifeline.feature.breedselector.preview.BreedPreviewParameterProvider
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState.CatBreeds.CatBreedViewData
+import uk.co.sw.gifeline.feature.common.ErrorScreen
+import uk.co.sw.gifeline.feature.common.LoadingScreen
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @Composable
@@ -51,6 +48,7 @@ fun BreedSelectorScreen(
     BreedSelectorLayout(
         state = state.value,
         onBreedSelected = onBreedSelected,
+        onRetry = viewModel::getCatBreeds,
         modifier = modifier
     )
 }
@@ -59,6 +57,7 @@ fun BreedSelectorScreen(
 fun BreedSelectorLayout(
     state: CatBreedViewState,
     onBreedSelected: (String) -> Unit,
+    onRetry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -71,8 +70,8 @@ fun BreedSelectorLayout(
     ) {
         when (state) {
             is CatBreedViewState.CatBreeds -> BreedsList(state.breeds, onBreedSelected)
-            CatBreedViewState.Error -> ErrorState()
-            CatBreedViewState.Loading -> CircularProgressIndicator()
+            CatBreedViewState.Error -> ErrorScreen(onRetry)
+            CatBreedViewState.Loading -> LoadingScreen()
         }
     }
 }
@@ -131,47 +130,12 @@ private fun Breed(
     }
 }
 
-@Composable
-private fun ErrorState(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Warning,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.error,
-            modifier = Modifier.size(64.dp)
-        )
-        Text(
-            text = "Error",
-            style = MaterialTheme.typography.titleMedium,
-        )
-    }
-}
-
 @Preview
 @Composable
 private fun BreedSelectorLayoutPreview(
     @PreviewParameter(BreedPreviewParameterProvider::class) cats: List<CatBreedViewData>
 ) {
     GiFelineTheme {
-        BreedSelectorLayout(CatBreedViewState.CatBreeds(cats), {})
-    }
-}
-
-@Preview
-@Composable
-private fun BreedSelectorErrorPreview() {
-    GiFelineTheme {
-        BreedSelectorLayout(CatBreedViewState.Error, {})
-    }
-}
-
-@Preview
-@Composable
-private fun BreedSelectorLoadingPreview() {
-    GiFelineTheme {
-        BreedSelectorLayout(CatBreedViewState.Loading, {})
+        BreedSelectorLayout(CatBreedViewState.CatBreeds(cats), {}, {})
     }
 }
