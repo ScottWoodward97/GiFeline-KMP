@@ -1,6 +1,7 @@
 package uk.co.sw.gifeline.feature.images
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +18,9 @@ fun ShimmerImage(
 ) {
     var isLoading by remember { mutableStateOf(false) }
     Box(
-        modifier = modifier.shimmer(isLoading),
+        modifier = modifier
+            .shimmer(isLoading)
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center,
     ) {
         SubcomposeAsyncImage(
