@@ -9,6 +9,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -60,6 +61,7 @@ fun SpinningCat(size: Dp) {
                     scaleY = animatedScale
                     transformOrigin = TransformOrigin.Center
                 },
+            tint = MaterialTheme.colorScheme.onBackground
         )
     }
 }
