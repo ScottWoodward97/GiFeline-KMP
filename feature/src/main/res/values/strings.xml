@@ -2,7 +2,12 @@
 <resources>
 
     <!--Home -->
+    <string name="home_title">GiFeline</string>
+    <string name="home_sub_title">Your one stop shop for all feline related imagery!</string>
+    <string name="home_select_breed_body">Explore the rarest collection of cat images known to the online world! You won\'t find these anywhere else!</string>
     <string name="home_select_breed_action">Select Breed</string>
+    <string name="home_small_print">GiFeline is not responsible for the global cat image shortage</string>
+    <string name="home_copyright">2024 © Belize</string>
 
     <!--Breed selector -->
     <string name="breed_selector_alt_name_fmt">(%s)</string>
