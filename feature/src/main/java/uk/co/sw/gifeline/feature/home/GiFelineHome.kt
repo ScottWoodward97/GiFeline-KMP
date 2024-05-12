@@ -59,7 +59,11 @@ fun GiFelineHome(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = onNavigateToBreedSelector,
             ) {
-                Text(text = stringResource(R.string.home_select_breed_action))
+                Text(
+                    text = stringResource(R.string.home_select_breed_action),
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
         Column(
