@@ -1,5 +1,6 @@
 package uk.co.sw.gifeline.feature.breedselector
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -131,6 +132,7 @@ private fun Breed(
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun BreedSelectorLayoutPreview(
     @PreviewParameter(BreedPreviewParameterProvider::class) cats: List<CatBreedViewData>

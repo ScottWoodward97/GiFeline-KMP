@@ -1,5 +1,6 @@
 package uk.co.sw.gifeline.feature.images
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import uk.co.sw.gifeline.feature.common.ErrorScreen
 import uk.co.sw.gifeline.feature.common.LoadingScreen
 import uk.co.sw.gifeline.feature.images.viewstate.CatImagesViewState
+import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @Composable
 fun CatImagesScreen(
@@ -93,7 +95,10 @@ private fun CatImage(
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ImageStatePreview() {
-    CatImagesState(images = listOf("", ""), {})
+    GiFelineTheme {
+        CatImagesState(images = listOf("", ""), {})
+    }
 }

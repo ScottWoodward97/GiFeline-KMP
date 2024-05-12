@@ -1,5 +1,6 @@
 package uk.co.sw.gifeline.feature.home
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import uk.co.sw.gifeline.feature.R
+import uk.co.sw.gifeline.feature.common.surfaceContainer
+import uk.co.sw.gifeline.feature.common.tertiaryContainer
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @Composable
@@ -34,26 +37,37 @@ fun GiFelineHome(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
                 text = stringResource(R.string.home_title),
                 style = MaterialTheme.typography.displayLarge,
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
                 text = stringResource(R.string.home_sub_title),
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .surfaceContainer()
             )
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .surfaceContainer()
+                .padding(8.dp)
         ) {
             Text(
                 text = stringResource(R.string.home_select_breed_body),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier.tertiaryContainer()
             )
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -67,23 +81,27 @@ fun GiFelineHome(
             }
         }
         Column(
+            modifier = Modifier.surfaceContainer(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = stringResource(R.string.home_small_print),
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
                 text = stringResource(R.string.home_copyright),
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
     }
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun GiFelineHomePreview() {
     GiFelineTheme {
