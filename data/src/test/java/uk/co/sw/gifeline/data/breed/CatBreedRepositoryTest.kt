@@ -38,13 +38,13 @@ class CatBreedRepositoryTest {
             every { isSuccessful } returns true
             every { body() } returns listOf(mockEntity)
         }
-        coEvery { mockCatBreedService.getBreeds() } returns mockResponse
+        coEvery { mockCatBreedService.getAllBreeds() } returns mockResponse
 
         // When
         val result = repository.getCatBreeds()
 
         // Then
-        coVerify { mockCatBreedService.getBreeds() }
+        coVerify { mockCatBreedService.getAllBreeds() }
         assertThat(result).isInstanceOf(ApiResponse.Success::class.java)
         with(result as ApiResponse.Success<List<CatBreedEntity>>) {
             assertThat(data).containsExactly(mockEntity)
@@ -60,13 +60,13 @@ class CatBreedRepositoryTest {
             every { code() } returns 404
             every { message() } returns "message"
         }
-        coEvery { mockCatBreedService.getBreeds() } returns mockResponse
+        coEvery { mockCatBreedService.getAllBreeds() } returns mockResponse
 
         // When
         val result = repository.getCatBreeds()
 
         // Then
-        coVerify { mockCatBreedService.getBreeds() }
+        coVerify { mockCatBreedService.getAllBreeds() }
         assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
         with(result as ApiResponse.Error<List<CatBreedEntity>>) {
             assertThat(error).isInstanceOf(HttpException::class.java)
@@ -83,13 +83,13 @@ class CatBreedRepositoryTest {
             every { code() } returns 500
             every { message() } returns "message"
         }
-        coEvery { mockCatBreedService.getBreeds() } returns mockResponse
+        coEvery { mockCatBreedService.getAllBreeds() } returns mockResponse
 
         // When
         val result = repository.getCatBreeds()
 
         // Then
-        coVerify { mockCatBreedService.getBreeds() }
+        coVerify { mockCatBreedService.getAllBreeds() }
         assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
         with(result as ApiResponse.Error<List<CatBreedEntity>>) {
             assertThat(error).isInstanceOf(HttpException::class.java)
@@ -101,13 +101,98 @@ class CatBreedRepositoryTest {
     fun `Given service error, When get breeds, Then return error`() = runTest {
         // Given
         val mockError: Exception = mockk()
-        coEvery { mockCatBreedService.getBreeds() } throws mockError
+        coEvery { mockCatBreedService.getAllBreeds() } throws mockError
 
         // When
         val result = repository.getCatBreeds()
 
         // Then
-        coVerify { mockCatBreedService.getBreeds() }
+        coVerify { mockCatBreedService.getAllBreeds() }
+        assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
+        with(result as ApiResponse.Error<List<CatBreedEntity>>) {
+            assertThat(error).isEqualTo(mockError)
+        }
+    }
+
+    @Test
+    fun `Given successful response and body, When search breeds, Then return success`() = runTest {
+        // Given
+        val mockEntity: CatBreedEntity = mockk()
+        val mockResponse: Response<List<CatBreedEntity>> = mockk {
+            every { isSuccessful } returns true
+            every { body() } returns listOf(mockEntity)
+        }
+        coEvery { mockCatBreedService.searchBreeds("term") } returns mockResponse
+
+        // When
+        val result = repository.searchCatBreeds("term")
+
+        // Then
+        coVerify { mockCatBreedService.searchBreeds("term") }
+        assertThat(result).isInstanceOf(ApiResponse.Success::class.java)
+        with(result as ApiResponse.Success<List<CatBreedEntity>>) {
+            assertThat(data).containsExactly(mockEntity)
+        }
+    }
+
+    @Test
+    fun `Given successful response and null body, When search breeds, Then return error`() =
+        runTest {
+            // Given
+            val mockResponse: Response<List<CatBreedEntity>> = mockk {
+                every { isSuccessful } returns true
+                every { body() } returns null
+                every { code() } returns 404
+                every { message() } returns "message"
+            }
+            coEvery { mockCatBreedService.searchBreeds("term") } returns mockResponse
+
+            // When
+            val result = repository.searchCatBreeds("term")
+
+            // Then
+            coVerify { mockCatBreedService.searchBreeds("term") }
+            assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
+            with(result as ApiResponse.Error<List<CatBreedEntity>>) {
+                assertThat(error).isInstanceOf(HttpException::class.java)
+                assertThat((error as HttpException).response()).isEqualTo(mockResponse)
+            }
+        }
+
+    @Test
+    fun `Given unsuccessful response, When search breeds, Then return error`() = runTest {
+        // Given
+        val mockResponse: Response<List<CatBreedEntity>> = mockk {
+            every { isSuccessful } returns false
+            every { body() } returns null
+            every { code() } returns 500
+            every { message() } returns "message"
+        }
+        coEvery { mockCatBreedService.searchBreeds("term") } returns mockResponse
+
+        // When
+        val result = repository.searchCatBreeds("term")
+
+        // Then
+        coVerify { mockCatBreedService.searchBreeds("term") }
+        assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
+        with(result as ApiResponse.Error<List<CatBreedEntity>>) {
+            assertThat(error).isInstanceOf(HttpException::class.java)
+            assertThat((error as HttpException).response()).isEqualTo(mockResponse)
+        }
+    }
+
+    @Test
+    fun `Given service error, When search breeds, Then return error`() = runTest {
+        // Given
+        val mockError: Exception = mockk()
+        coEvery { mockCatBreedService.searchBreeds("term") } throws mockError
+
+        // When
+        val result = repository.searchCatBreeds("term")
+
+        // Then
+        coVerify { mockCatBreedService.searchBreeds("term") }
         assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
         with(result as ApiResponse.Error<List<CatBreedEntity>>) {
             assertThat(error).isEqualTo(mockError)
