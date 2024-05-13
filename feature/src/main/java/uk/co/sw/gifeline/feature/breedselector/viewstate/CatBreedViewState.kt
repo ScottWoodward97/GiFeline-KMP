@@ -10,4 +10,6 @@ sealed class CatBreedViewState {
 
     data object Loading : CatBreedViewState()
 
+    data object Empty : CatBreedViewState()
+
 }

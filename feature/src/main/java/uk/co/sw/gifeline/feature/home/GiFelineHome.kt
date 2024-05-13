@@ -25,6 +25,7 @@ import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 @Composable
 fun GiFelineHome(
     onNavigateToBreedSelector: () -> Unit,
+    onNavigateToBreedSearch: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -63,11 +64,40 @@ fun GiFelineHome(
                 .padding(8.dp)
         ) {
             Text(
-                text = stringResource(R.string.home_select_breed_body),
+                text = stringResource(id = R.string.home_search_breeds_body),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
-                modifier = Modifier.tertiaryContainer()
+                modifier = Modifier
+                    .tertiaryContainer()
+                    .fillMaxWidth()
+            )
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = onNavigateToBreedSearch,
+            ) {
+                Text(
+                    text = stringResource(R.string.home_search_breeds_action),
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                )
+            }
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .surfaceContainer()
+                .padding(8.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.home_select_breed_body),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier
+                    .tertiaryContainer()
+                    .fillMaxWidth()
             )
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -105,6 +135,6 @@ fun GiFelineHome(
 @Composable
 private fun GiFelineHomePreview() {
     GiFelineTheme {
-        GiFelineHome({})
+        GiFelineHome({}, {})
     }
 }
