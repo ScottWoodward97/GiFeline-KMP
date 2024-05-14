@@ -84,5 +84,53 @@ class GetCatImagesUseCaseTest {
             assertThat(error).isEqualTo(mockError)
         }
     }
+
+    @Test
+    fun `Given repository success, When invoked with limit, Then return success result`() = runTest {
+        // Given
+        val breedId = "breedId"
+        val limit = 5
+        val mockEntity: CatImagesEntity = mockk()
+        coEvery {
+            mockCatImageRepository.getCatImages(breedId = breedId, limit = limit)
+        } returns ApiResponse.Success(listOf(mockEntity))
+
+        val mockImage: CatImage = mockk()
+        every {
+            mockCatImageMapper.map(mockEntity)
+        } returns mockImage
+
+        // When
+        val result = useCase(breedId = breedId, numImages = limit)
+
+        // Then
+        coVerify { mockCatImageRepository.getCatImages(breedId = breedId, limit = limit) }
+        verify { mockCatImageMapper.map(mockEntity) }
+        assertThat(result).isInstanceOf(Result.Success::class.java)
+        with(result as Result.Success<List<CatImage>>) {
+            assertThat(data).containsExactly(mockImage)
+        }
+    }
+
+    @Test
+    fun `Given repository error, When invoked with limit, Then return error result`() = runTest {
+        // Given
+        val breedId = "breedId"
+        val limit = 5
+        val mockError: Throwable = mockk()
+        coEvery {
+            mockCatImageRepository.getCatImages(breedId = breedId, limit = limit)
+        } returns ApiResponse.Error(mockError)
+
+        // When
+        val result = useCase(breedId = breedId, numImages = limit)
+
+        // Then
+        coVerify { mockCatImageRepository.getCatImages(breedId = breedId, limit = limit) }
+        assertThat(result).isInstanceOf(Result.Error::class.java)
+        with(result as Result.Error) {
+            assertThat(error).isEqualTo(mockError)
+        }
+    }
     
 }

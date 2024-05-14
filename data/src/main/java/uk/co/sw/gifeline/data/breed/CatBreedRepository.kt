@@ -16,4 +16,8 @@ class CatBreedRepository @Inject constructor(
         return handleResponse { catBreedService.searchBreeds(searchTerm) }
     }
 
+    suspend fun findCatBreed(breedId: String): ApiResponse<CatBreedEntity> {
+        return handleResponse { catBreedService.findBreed(breedId) }
+    }
+
 }

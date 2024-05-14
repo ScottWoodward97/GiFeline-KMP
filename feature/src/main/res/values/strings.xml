@@ -18,4 +18,15 @@
     <string name="error_screen_message">Cat-astrophic Error!</string>
     <string name="error_screen_retry_action">Try Again</string>
 
+    <!-- Breed Profile -->
+    <string name="breed_profile_description_title">About</string>
+    <string name="breed_profile_info_lifespan_title">Lifespan</string>
+    <string name="breed_profile_info_lifespan_measure">years</string>
+    <string name="breed_profile_info_weight_title">Weight</string>
+    <string name="breed_profile_info_weight_measure">kg</string>
+    <string name="breed_profile_info_origin_title">Origin</string>
+    <string name="breed_profile_info_gallery_title">Gallery</string>
+    <string name="breed_profile_wiki_title">Want to learn more?</string>
+    <string name="breed_profile_wiki_body">Click here to learn more about the %1$s</string>
+
 </resources>
