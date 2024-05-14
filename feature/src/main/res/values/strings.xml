@@ -18,6 +18,9 @@
     <string name="error_screen_message">Cat-astrophic Error!</string>
     <string name="error_screen_retry_action">Try Again</string>
 
+    <!-- Empty Screen -->
+    <string name="empty_screen_message">No results.\nPurr-haps try searching something else!</string>
+
     <!-- Breed Profile -->
     <string name="breed_profile_description_title">About</string>
     <string name="breed_profile_info_lifespan_title">Lifespan</string>
