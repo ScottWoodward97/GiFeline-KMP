@@ -25,6 +25,11 @@ class BreedProfileViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
+    private companion object {
+        const val PAGE_NUMBER = 0
+        const val NUM_IMAGES = 3
+    }
+
     private val breedId: String by lazy { savedStateHandle["breedId"] ?: "" }
 
     private val _profileViewState: MutableStateFlow<BreedProfileViewState> =
@@ -42,7 +47,13 @@ class BreedProfileViewModel @Inject constructor(
         return when (result) {
             is Result.Success -> {
                 val catImages: List<CatImage> =
-                    when (val imageResult = getImageUseCase(breedId, 3)) {
+                    when (
+                        val imageResult = getImageUseCase(
+                            breedId = breedId,
+                            page = PAGE_NUMBER,
+                            limit = NUM_IMAGES
+                        )
+                    ) {
                         is Result.Success -> imageResult.data
                         is Result.Error -> emptyList()
                     }

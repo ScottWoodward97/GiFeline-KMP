@@ -10,12 +10,19 @@ class GetCatImagesUseCase @Inject constructor(
     private val catImageRepository: CatImageRepository,
     private val catImageMapper: CatImageMapper,
 ) {
-    suspend operator fun invoke(breedId: String): Result<List<CatImage>> {
-        return handleResult(catImageRepository.getCatImages(breedId))
-    }
 
-    suspend operator fun invoke(breedId: String, numImages: Int): Result<List<CatImage>> {
-        return handleResult(catImageRepository.getCatImages(breedId, limit = numImages))
+    suspend operator fun invoke(
+        breedId: String,
+        page: Int = PAGE,
+        limit: Int = LIMIT
+    ): Result<List<CatImage>> {
+        return handleResult(
+            catImageRepository.getCatImages(
+                breedId = breedId,
+                page = page,
+                limit = limit
+            )
+        )
     }
 
     private fun handleResult(response: ApiResponse<List<CatImagesEntity>>): Result<List<CatImage>> {
@@ -23,5 +30,10 @@ class GetCatImagesUseCase @Inject constructor(
             is ApiResponse.Success -> Result.Success(response.data.map { catImageMapper.map(it) })
             is ApiResponse.Error -> Result.Error(response.error)
         }
+    }
+
+    private companion object {
+        const val PAGE = 0
+        const val LIMIT = 10
     }
 }

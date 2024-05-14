@@ -11,7 +11,7 @@ interface CatImagesService {
         @Query("breed_ids") breedId: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-        @Query("order") order: String = "RAND",
+        @Query("order") order: String = "ASC",
     ): Response<List<CatImagesEntity>>
 
 }
