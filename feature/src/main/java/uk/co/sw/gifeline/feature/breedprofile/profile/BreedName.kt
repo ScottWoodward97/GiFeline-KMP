@@ -30,7 +30,10 @@ fun BreedName(
         )
         if (altNames.isNotEmpty()) {
             Text(
-                text = stringResource(id = R.string.breed_selector_alt_name_fmt, altNames.joinToString(", ")), //todo rename
+                text = stringResource(
+                    id = R.string.breed_alt_name_fmt,
+                    altNames.joinToString(", ")
+                ),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
             )
