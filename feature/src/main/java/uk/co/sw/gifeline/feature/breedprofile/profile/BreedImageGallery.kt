@@ -57,7 +57,7 @@ fun BreedImageGallery(
             repeat(pagerState.pageCount) {
                 val animatedSize = animateDpAsState(
                     targetValue = if (pagerState.currentPage == it) 8.dp else 4.dp,
-                    label = ""
+                    label = "GalleryPagerState"
                 )
                 Box(
                     modifier = Modifier

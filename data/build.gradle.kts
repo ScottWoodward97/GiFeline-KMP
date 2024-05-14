@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.bundles.data)
     kapt(libs.bundles.data.kapt)
     testImplementation(libs.bundles.test)
