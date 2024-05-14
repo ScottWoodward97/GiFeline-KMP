@@ -26,7 +26,7 @@ import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @Composable
 fun SpinningCat(size: Dp) {
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "CatInfinite")
     val rotation by transition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
@@ -36,7 +36,7 @@ fun SpinningCat(size: Dp) {
                 easing = LinearEasing,
             )
         ),
-        label = ""
+        label = "CatInfinite.Rotation"
     )
     val animatedScale by transition.animateFloat(
         initialValue = 0.75f,
@@ -48,7 +48,7 @@ fun SpinningCat(size: Dp) {
             ),
             repeatMode = RepeatMode.Reverse,
         ),
-        label = ""
+        label = "CatInfinite.Scale"
     )
     Box(Modifier.size(size * 1.25f), contentAlignment = Alignment.Center) {
         Icon(
