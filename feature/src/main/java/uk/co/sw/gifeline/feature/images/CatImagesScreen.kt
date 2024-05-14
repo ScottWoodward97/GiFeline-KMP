@@ -1,20 +1,19 @@
 package uk.co.sw.gifeline.feature.images
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,6 +35,7 @@ fun CatImagesScreen(
     CatImagesLayout(
         state = state.value,
         onImageClicked = onImageClicked,
+        onLoadMore = viewModel::getImages,
         onRetry = viewModel::getImages,
         modifier = modifier
     )
@@ -45,11 +45,12 @@ fun CatImagesScreen(
 fun CatImagesLayout(
     state: CatImagesViewState,
     onImageClicked: (String) -> Unit,
+    onLoadMore: () -> Unit,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     when (state) {
-        is CatImagesViewState.Images -> CatImagesState(state.urls, onImageClicked, modifier)
+        is CatImagesViewState.Images -> CatImagesState(state.urls, onImageClicked, onLoadMore, modifier)
         CatImagesViewState.Error -> ErrorScreen(onRetry, modifier)
         CatImagesViewState.Loading -> LoadingScreen(modifier)
     }
@@ -59,38 +60,27 @@ fun CatImagesLayout(
 private fun CatImagesState(
     images: List<String>,
     onImageClicked: (String) -> Unit,
+    onLoadMore: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+    LazyVerticalStaggeredGrid(
+        modifier = modifier.fillMaxSize(),
+        columns = StaggeredGridCells.Fixed(2),
+        contentPadding = PaddingValues(4.dp),
+        verticalItemSpacing = 8.dp,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(images) {
-            CatImage(url = it, onImageClicked = onImageClicked)
+        itemsIndexed(images) { index, imageUrl ->
+            ShimmerImage(
+                url = imageUrl,
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .clickable(role = Role.Button) { onImageClicked(imageUrl) },
+            )
+            if (index == images.lastIndex) {
+                onLoadMore()
+            }
         }
-    }
-}
-
-@Composable
-private fun CatImage(
-    url: String,
-    onImageClicked: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    ElevatedCard(
-        modifier = modifier
-            .padding(horizontal = 8.dp)
-            .fillMaxWidth(),
-        onClick = { onImageClicked(url) }
-    ) {
-        ShimmerImage(
-            url = url,
-            modifier = Modifier
-                .height(200.dp)
-                .padding(8.dp)
-        )
     }
 }
 
@@ -99,6 +89,6 @@ private fun CatImage(
 @Composable
 private fun ImageStatePreview() {
     GiFelineTheme {
-        CatImagesState(images = listOf("", ""), {})
+        CatImagesState(images = listOf("", ""), {}, {})
     }
 }

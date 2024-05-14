@@ -8,6 +8,8 @@ import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -20,6 +22,7 @@ import uk.co.sw.gifeline.domain.response.Result
 import uk.co.sw.gifeline.feature.CoroutineTestRule
 import uk.co.sw.gifeline.feature.images.viewstate.CatImagesViewState
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class CatImagesViewModelTest {
 
     @get:Rule
@@ -49,7 +52,9 @@ class CatImagesViewModelTest {
         val breedId = "breedId"
         every { mockSavedStateHandle.get<String?>("breedId") } returns breedId
 
-        coEvery { mockGetCatImagesUseCase.invoke(breedId) } returns Result.Error(mockk())
+        coEvery {
+            mockGetCatImagesUseCase.invoke(breedId, any(), any())
+        } returns Result.Error(mockk())
 
         viewModel.state.test {
             // When
@@ -73,7 +78,9 @@ class CatImagesViewModelTest {
         val mockImage: CatImage = mockk {
             every { url } returns "url"
         }
-        coEvery { mockGetCatImagesUseCase.invoke(breedId) } returns Result.Success(listOf(mockImage))
+        coEvery {
+            mockGetCatImagesUseCase.invoke(breedId = breedId, page = 0, limit = 10)
+        } returns Result.Success(listOf(mockImage))
 
         viewModel.state.test {
             // When
@@ -81,14 +88,81 @@ class CatImagesViewModelTest {
 
             // Then
             assertThat(awaitItem()).isEqualTo(CatImagesViewState.Loading)
-            with(awaitItem()){
+            with(awaitItem()) {
                 assertThat(this).isInstanceOf(CatImagesViewState.Images::class.java)
                 assertThat((this as CatImagesViewState.Images).urls).containsExactly("url")
             }
             expectNoEvents()
             verify { mockSavedStateHandle.get<String?>("breedId") }
-            coVerify { mockGetCatImagesUseCase.invoke(breedId) }
+            coVerify { mockGetCatImagesUseCase.invoke(breedId = breedId, page = 0, limit = 10) }
         }
+    }
 
+    @Test
+    fun `Given full page, When get images, Then load second page`() = runTest {
+        // Given
+        val breedId = "breedId"
+        every { mockSavedStateHandle.get<String?>("breedId") } returns breedId
+
+        val mockImage: CatImage = mockk {
+            every { url } returns "url"
+        }
+        val imageList = buildList { repeat(10) { add(mockImage) } }
+        coEvery {
+            mockGetCatImagesUseCase.invoke(breedId = breedId, page = any(), limit = 10)
+        } returns Result.Success(imageList)
+
+        viewModel.state.test {
+            // When
+            viewModel.getImages()
+            viewModel.getImages()
+
+            // Then
+            assertThat(awaitItem()).isEqualTo(CatImagesViewState.Loading)
+            with(awaitItem()) {
+                assertThat(this).isInstanceOf(CatImagesViewState.Images::class.java)
+                assertThat((this as CatImagesViewState.Images).urls).hasSize(10)
+            }
+            with(awaitItem()) {
+                assertThat(this).isInstanceOf(CatImagesViewState.Images::class.java)
+                assertThat((this as CatImagesViewState.Images).urls).hasSize(20)
+            }
+            expectNoEvents()
+            verify { mockSavedStateHandle.get<String?>("breedId") }
+            coVerify { mockGetCatImagesUseCase.invoke(breedId = breedId, page = 0, limit = 10) }
+            coVerify { mockGetCatImagesUseCase.invoke(breedId = breedId, page = 1, limit = 10) }
+        }
+    }
+
+    @Test
+    fun `Given not full page, When get images, Then don't load second page`() = runTest {
+        // Given
+        val breedId = "breedId"
+        every { mockSavedStateHandle.get<String?>("breedId") } returns breedId
+
+        val mockImage: CatImage = mockk {
+            every { url } returns "url"
+        }
+        val imageList = buildList { repeat(9) { add(mockImage) } }
+        coEvery {
+            mockGetCatImagesUseCase.invoke(breedId = breedId, page = any(), limit = 10)
+        } returns Result.Success(imageList)
+
+        viewModel.state.test {
+            // When
+            viewModel.getImages()
+            advanceUntilIdle()
+            viewModel.getImages()
+
+            // Then
+            assertThat(awaitItem()).isEqualTo(CatImagesViewState.Loading)
+            with(awaitItem()) {
+                assertThat(this).isInstanceOf(CatImagesViewState.Images::class.java)
+                assertThat((this as CatImagesViewState.Images).urls).hasSize(9)
+            }
+            expectNoEvents()
+            verify { mockSavedStateHandle.get<String?>("breedId") }
+            coVerify { mockGetCatImagesUseCase.invoke(breedId = breedId, page = 0, limit = 10) }
+        }
     }
 }

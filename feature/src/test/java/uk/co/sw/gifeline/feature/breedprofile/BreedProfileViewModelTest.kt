@@ -67,7 +67,7 @@ class BreedProfileViewModelTest {
 
         val mockImage: CatImage = mockk()
         coEvery {
-            mockGetImageUseCase.invoke(breedId, 3)
+            mockGetImageUseCase.invoke(breedId = breedId, page = 0, limit = 3)
         } returns Result.Success(listOf(mockImage))
 
         val mockViewState: BreedProfileViewState.Profile = mockk()
@@ -85,7 +85,7 @@ class BreedProfileViewModelTest {
             expectNoEvents()
             verify { mockSavedStateHandle.get<String?>("breedId") }
             coVerify { mockFindBreedUseCase.invoke(breedId) }
-            coVerify { mockGetImageUseCase.invoke(breedId, 3) }
+            coVerify { mockGetImageUseCase.invoke(breedId = breedId, page = 0, limit = 3) }
             verify { mockBreedProfileViewDataMapper.map(mockBreed, listOf(mockImage)) }
         }
     }
@@ -99,7 +99,9 @@ class BreedProfileViewModelTest {
         val mockBreed: CatBreed = mockk()
         coEvery { mockFindBreedUseCase.invoke(breedId) } returns Result.Success(mockBreed)
 
-        coEvery { mockGetImageUseCase.invoke(breedId, 3) } returns Result.Error(mockk())
+        coEvery {
+            mockGetImageUseCase.invoke(breedId = breedId, page = 0, limit = 3)
+        } returns Result.Error(mockk())
 
         val mockViewState: BreedProfileViewState.Profile = mockk()
         every { mockBreedProfileViewDataMapper.map(mockBreed, emptyList()) } returns mockViewState
@@ -114,7 +116,7 @@ class BreedProfileViewModelTest {
             expectNoEvents()
             verify { mockSavedStateHandle.get<String?>("breedId") }
             coVerify { mockFindBreedUseCase.invoke(breedId) }
-            coVerify { mockGetImageUseCase.invoke(breedId, 3) }
+            coVerify { mockGetImageUseCase.invoke(breedId = breedId, page = 0, limit = 3) }
             verify { mockBreedProfileViewDataMapper.map(mockBreed, emptyList()) }
         }
     }

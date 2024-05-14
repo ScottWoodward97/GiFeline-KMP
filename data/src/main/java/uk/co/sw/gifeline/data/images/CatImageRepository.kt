@@ -10,15 +10,10 @@ class CatImageRepository @Inject constructor(
 
     suspend fun getCatImages(
         breedId: String,
-        page: Int = PAGE,
-        limit: Int = LIMIT,
+        page: Int,
+        limit: Int,
     ): ApiResponse<List<CatImagesEntity>> {
         return handleResponse { catImagesService.getImages(breedId, page, limit) }
-    }
-
-    private companion object {
-        const val PAGE = 0
-        const val LIMIT = 10
     }
 
 }
