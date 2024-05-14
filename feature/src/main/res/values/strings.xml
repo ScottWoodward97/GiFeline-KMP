@@ -31,5 +31,6 @@
     <string name="breed_profile_state_vocalisation_title">Vocalisation</string>
     <string name="breed_profile_wiki_title">Want to learn more?</string>
     <string name="breed_profile_wiki_body">Click here to learn more about the %1$s</string>
+    <string name="nav_back_content_description">Navigate Back</string>
 
 </resources>
