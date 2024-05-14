@@ -33,9 +33,8 @@ android {
 }
 
 dependencies {
-
     implementation(project(":data"))
+
     implementation(libs.bundles.domain)
     testImplementation(libs.bundles.test)
-
 }
