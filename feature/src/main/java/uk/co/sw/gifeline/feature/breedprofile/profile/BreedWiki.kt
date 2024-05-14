@@ -10,6 +10,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -27,13 +31,16 @@ fun BreedWiki(
     url: String?,
     modifier: Modifier = Modifier
 ) {
-    if (url.isNullOrEmpty().not()) {
+    var isSheetOpen by remember { mutableStateOf(false) }
+    if (!url.isNullOrEmpty()) {
         Row(
             modifier = modifier
                 .tertiaryContainer()
                 .fillMaxWidth()
                 .padding(4.dp)
-                .clickable(role = Role.Button) { url }, //todo open web
+                .clickable(role = Role.Button) {
+                    isSheetOpen = true
+                },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -55,6 +62,9 @@ fun BreedWiki(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onTertiaryContainer,
             )
+        }
+        if (isSheetOpen) {
+            WebBottomSheet(url = url, onDismiss = { isSheetOpen = false })
         }
     }
 }
