@@ -93,7 +93,7 @@ private fun Breed(
             if (breed.altNames.isNotEmpty()) {
                 Text(
                     text = stringResource(
-                        id = R.string.breed_selector_alt_name_fmt,
+                        id = R.string.breed_alt_name_fmt,
                         breed.altNames.joinToString(", ")
                     ),
                     style = MaterialTheme.typography.bodySmall,

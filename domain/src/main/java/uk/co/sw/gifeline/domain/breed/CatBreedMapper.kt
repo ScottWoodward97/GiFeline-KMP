@@ -11,6 +11,16 @@ class CatBreedMapper @Inject constructor() {
             name = entity.name,
             altNames = entity.altNames?.split(", ").orEmpty()
                 .filter { it.isNotBlank() },
+            origin = entity.origin,
+            description = entity.description,
+            lifeSpan = entity.lifeSpan,
+            weight = entity.weight.metric,
+            stats = CatBreed.Stats(
+                energyLevel = entity.energyLevel,
+                intelligence = entity.intelligence,
+                vocalisation = entity.vocalisation
+            ),
+            wikiUrl = entity.wikiUrl,
         )
     }
 

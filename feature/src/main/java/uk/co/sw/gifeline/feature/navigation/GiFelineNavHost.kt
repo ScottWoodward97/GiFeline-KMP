@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.navArgument
+import uk.co.sw.gifeline.feature.breedprofile.BreedProfileScreen
 import uk.co.sw.gifeline.feature.breedselector.BreedSearchScreen
 import uk.co.sw.gifeline.feature.breedselector.BreedSelectorScreen
 import uk.co.sw.gifeline.feature.home.GiFelineHome
@@ -33,10 +34,19 @@ fun GiFelineNavHost(
             )
         }
         dialog(route = "allBreeds") {
-            BreedSelectorScreen(onBreedSelected = { id -> navController.navigate("images/$id") })
+            BreedSelectorScreen(onBreedSelected = { id -> navController.navigate("breed/$id") })
         }
         dialog(route = "searchBreed") {
-            BreedSearchScreen(onBreedSelected = { id -> navController.navigate("images/$id") })
+            BreedSearchScreen(onBreedSelected = { id -> navController.navigate("breed/$id") })
+        }
+        composable(
+            route = "breed/{breedId}",
+            arguments = listOf(navArgument("breedId") { type = NavType.StringType })
+        ) {
+            BreedProfileScreen(
+                onNavigateToImage = { url -> navController.navigate("image/${url.toNavSafeUrl()}") },
+                onNavigateToGallery = { breedId -> navController.navigate("images/$breedId") }
+            )
         }
         composable(
             route = "images/{breedId}",

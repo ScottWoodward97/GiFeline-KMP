@@ -11,11 +11,25 @@
     <string name="home_small_print">GiFeline is not responsible for the global cat image shortage</string>
     <string name="home_copyright">2024 © Belize</string>
 
-    <!--Breed selector -->
-    <string name="breed_selector_alt_name_fmt">(%s)</string>
+    <!--Breed name -->
+    <string name="breed_alt_name_fmt">(%s)</string>
 
     <!-- Error Screen -->
     <string name="error_screen_message">Cat-astrophic Error!</string>
     <string name="error_screen_retry_action">Try Again</string>
+
+    <!-- Breed Profile -->
+    <string name="breed_profile_description_title">About</string>
+    <string name="breed_profile_info_lifespan_title">Lifespan</string>
+    <string name="breed_profile_info_lifespan_measure">years</string>
+    <string name="breed_profile_info_weight_title">Weight</string>
+    <string name="breed_profile_info_weight_measure">kg</string>
+    <string name="breed_profile_info_origin_title">Origin</string>
+    <string name="breed_profile_info_gallery_title">Gallery</string>
+    <string name="breed_profile_state_energy_title">Energy</string>
+    <string name="breed_profile_state_intelligence_title">Intelligence</string>
+    <string name="breed_profile_state_vocalisation_title">Vocalisation</string>
+    <string name="breed_profile_wiki_title">Want to learn more?</string>
+    <string name="breed_profile_wiki_body">Click here to learn more about the %1$s</string>
 
 </resources>
