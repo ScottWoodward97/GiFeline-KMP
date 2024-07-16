@@ -57,20 +57,15 @@ Dependency Injection is achieved through the use of Hilt, mostly via constructor
 use of module based injection was for networking, to provide singleton instances of retrofit and okhttp3.
 
 ### Testing
-The entire project is unit tested using JUnit 4, AssertJ, Mockk, and Turbine. The choices for these
-technologies are mostly due to familiarity, with exception of Mockk, where I decided to take this
-opportunity to experiment away from my Mockito-kotlin shaped comfort zone.
+The entire project is unit tested using JUnit 4, AssertJ, Mockk, and Turbine.
 
-Time constraints mean there are no end to end tests. During development I encountered several 
-inconsistencies with the api so did not feel comfortable relying on live data for testing purposes.
-
-## Stretch Goals
-There are several areas that, with more time, I would have added. These include:
+## Future improvements
+There are several areas that I want to spend more time improving with this project. These include:
 
 - **Network caching** - There is no network caching currently in this project. Ideally this could be 
-achieved through OkHttp3, however this proved to be more of a challenge so was left out.
+achieved through OkHttp3 but could do something a bit more manual.
 - **Utilising the breed stats further** - Only three hand selected stats were chosen for display, with so
 many more available in the responses it could provide room for some fun design choices.
 - **Font provider migration** - Using Google font providers seemed like a good idea initially, however it
 has led to some interesting quirks where the preview and build versions differ in font design. 
-In the future moving back to downloaded font files might prove to be more consistent.
+I might move back to downloaded font files as they prove to be more consistent.
