@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.jetbrainsKotlinKapt)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -38,4 +39,5 @@ dependencies {
     implementation(libs.bundles.data)
     kapt(libs.bundles.data.kapt)
     testImplementation(libs.bundles.test)
+    testImplementation(libs.bundles.data.test)
 }
