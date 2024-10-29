@@ -1,8 +1,8 @@
 package uk.co.sw.gifeline.data.images
 
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class CatImagesEntity(
     val id: String,
     val url: String,

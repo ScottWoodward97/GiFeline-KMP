@@ -1,17 +1,21 @@
 package uk.co.sw.gifeline.data.images
 
+import io.ktor.client.call.body
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkStatic
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import retrofit2.HttpException
-import retrofit2.Response
 import uk.co.sw.gifeline.data.common.response.ApiResponse
 
 class CatImageRepositoryTest {
@@ -37,9 +41,12 @@ class CatImageRepositoryTest {
         val page = 0
         val limit = 1
         val mockEntity: CatImagesEntity = mockk()
-        val mockResponse: Response<List<CatImagesEntity>> = mockk {
-            every { isSuccessful } returns true
-            every { body() } returns listOf(mockEntity)
+        val mockStatus: HttpStatusCode = mockk {
+            every { value } returns 200
+        }
+        val mockResponse: HttpResponse = mockk {
+            every { status } returns mockStatus
+            coEvery { body<List<CatImagesEntity>>() } returns listOf(mockEntity)
         }
         coEvery { mockCatImageService.getImages(breedId, any(), any()) } returns mockResponse
 
@@ -55,42 +62,19 @@ class CatImageRepositoryTest {
     }
 
     @Test
-    fun `Given successful response and null body, When get images, Then return error`() = runTest {
-        // Given
-        val breedId = "breedId"
-        val page = 0
-        val limit = 1
-        val mockResponse: Response<List<CatImagesEntity>> = mockk {
-            every { isSuccessful } returns true
-            every { body() } returns null
-            every { code() } returns 404
-            every { message() } returns "message"
-        }
-        coEvery { mockCatImageService.getImages(breedId, page, limit) } returns mockResponse
-
-        // When
-        val result = repository.getCatImages(breedId, page, limit)
-
-        // Then
-        coVerify { mockCatImageService.getImages(breedId, page, limit) }
-        assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
-        with(result as ApiResponse.Error<List<CatImagesEntity>>) {
-            assertThat(error).isInstanceOf(HttpException::class.java)
-            assertThat((error as HttpException).response()).isEqualTo(mockResponse)
-        }
-    }
-
-    @Test
     fun `Given unsuccessful response, When get images, Then return error`() = runTest {
         // Given
+        mockkStatic(HttpResponse::bodyAsText)
         val breedId = "breedId"
         val page = 0
         val limit = 1
-        val mockResponse: Response<List<CatImagesEntity>> = mockk {
-            every { isSuccessful } returns false
-            every { body() } returns null
-            every { code() } returns 500
-            every { message() } returns "message"
+        val mockStatus: HttpStatusCode = mockk {
+            every { value } returns 500
+        }
+        val mockResponse: HttpResponse = mockk {
+            every { status } returns mockStatus
+            coEvery { body<List<CatImagesEntity>>() } returns mockk()
+            coEvery { bodyAsText() } returns "message"
         }
         coEvery { mockCatImageService.getImages(breedId, page, limit) } returns mockResponse
 
@@ -101,8 +85,8 @@ class CatImageRepositoryTest {
         coVerify { mockCatImageService.getImages(breedId, page, limit) }
         assertThat(result).isInstanceOf(ApiResponse.Error::class.java)
         with(result as ApiResponse.Error<List<CatImagesEntity>>) {
-            assertThat(error).isInstanceOf(HttpException::class.java)
-            assertThat((error as HttpException).response()).isEqualTo(mockResponse)
+            assertThat(error).isInstanceOf(ResponseException::class.java)
+            assertThat((error as ResponseException).message).contains("message")
         }
     }
 

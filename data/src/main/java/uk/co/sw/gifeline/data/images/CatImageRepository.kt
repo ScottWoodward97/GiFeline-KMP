@@ -1,12 +1,12 @@
 package uk.co.sw.gifeline.data.images
 
-import uk.co.sw.gifeline.data.common.Repository
+import uk.co.sw.gifeline.data.common.KtorRepository
 import uk.co.sw.gifeline.data.common.response.ApiResponse
 import javax.inject.Inject
 
 class CatImageRepository @Inject constructor(
     private val catImagesService: CatImagesService,
-) : Repository() {
+) : KtorRepository() {
 
     suspend fun getCatImages(
         breedId: String,
