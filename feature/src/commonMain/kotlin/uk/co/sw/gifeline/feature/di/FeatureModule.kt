@@ -6,5 +6,5 @@ import uk.co.sw.gifeline.feature.breedselector.di.breedSelectorModule
 import uk.co.sw.gifeline.feature.images.di.imagesModule
 
 val featureModule = module {
-    includes(resourceModule, breedProfileModule, breedSelectorModule, imagesModule)
+    includes(breedProfileModule, breedSelectorModule, imagesModule)
 }

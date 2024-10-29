@@ -16,12 +16,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import uk.co.sw.gifeline.feature.R
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.breed_profile_info_gallery_title
+import gifeline.feature.generated.resources.breed_profile_info_lifespan_measure
+import gifeline.feature.generated.resources.breed_profile_info_lifespan_title
+import gifeline.feature.generated.resources.breed_profile_info_origin_title
+import gifeline.feature.generated.resources.breed_profile_info_weight_measure
+import gifeline.feature.generated.resources.breed_profile_info_weight_title
+import gifeline.feature.generated.resources.ic_photo_gallery
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import uk.co.sw.gifeline.feature.common.secondaryContainer
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
@@ -47,7 +54,7 @@ fun BreedInfo(
                 .fillMaxHeight()
         ) {
             Text(
-                text = stringResource(R.string.breed_profile_info_lifespan_title),
+                text = stringResource(Res.string.breed_profile_info_lifespan_title),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 textAlign = TextAlign.Start,
@@ -62,7 +69,7 @@ fun BreedInfo(
                 modifier = Modifier.fillMaxWidth(),
             )
             Text(
-                text = stringResource(R.string.breed_profile_info_lifespan_measure),
+                text = stringResource(Res.string.breed_profile_info_lifespan_measure),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 textAlign = TextAlign.End,
@@ -76,7 +83,7 @@ fun BreedInfo(
                 .fillMaxHeight()
         ) {
             Text(
-                text = stringResource(R.string.breed_profile_info_weight_title),
+                text = stringResource(Res.string.breed_profile_info_weight_title),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 textAlign = TextAlign.Start,
@@ -91,7 +98,7 @@ fun BreedInfo(
                 modifier = Modifier.fillMaxWidth(),
             )
             Text(
-                text = stringResource(R.string.breed_profile_info_weight_measure),
+                text = stringResource(Res.string.breed_profile_info_weight_measure),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 textAlign = TextAlign.End,
@@ -105,7 +112,7 @@ fun BreedInfo(
                 .fillMaxHeight()
         ) {
             Text(
-                text = stringResource(R.string.breed_profile_info_origin_title),
+                text = stringResource(Res.string.breed_profile_info_origin_title),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 textAlign = TextAlign.Start,
@@ -128,14 +135,14 @@ fun BreedInfo(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = stringResource(R.string.breed_profile_info_gallery_title),
+                text = stringResource(Res.string.breed_profile_info_gallery_title),
                 style = MaterialTheme.typography.labelSmall,
                 textAlign = TextAlign.Start,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.fillMaxWidth(),
             )
             Icon(
-                painter = painterResource(id = R.drawable.ic_photo_gallery),
+                painter = painterResource(Res.drawable.ic_photo_gallery),
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.weight(1f)

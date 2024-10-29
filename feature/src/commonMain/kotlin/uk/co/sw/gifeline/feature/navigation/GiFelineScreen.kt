@@ -15,12 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import uk.co.sw.gifeline.feature.R
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.nav_back_content_description
+import org.jetbrains.compose.resources.stringResource
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +44,7 @@ fun GiFelineScreen(modifier: Modifier = Modifier) {
                         IconButton(onClick = { navController.navigateUp() }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.nav_back_content_description),
+                                contentDescription = stringResource(Res.string.nav_back_content_description),
                                 tint = MaterialTheme.colorScheme.onSurface
                             )
                         }

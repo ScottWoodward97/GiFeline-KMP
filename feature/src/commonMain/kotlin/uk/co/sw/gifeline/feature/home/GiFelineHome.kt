@@ -13,11 +13,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import uk.co.sw.gifeline.feature.R
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.home_copyright
+import gifeline.feature.generated.resources.home_search_breeds_action
+import gifeline.feature.generated.resources.home_search_breeds_body
+import gifeline.feature.generated.resources.home_select_breed_action
+import gifeline.feature.generated.resources.home_select_breed_body
+import gifeline.feature.generated.resources.home_small_print
+import gifeline.feature.generated.resources.home_sub_title
+import gifeline.feature.generated.resources.home_title
+import org.jetbrains.compose.resources.stringResource
 import uk.co.sw.gifeline.feature.common.surfaceContainer
 import uk.co.sw.gifeline.feature.common.tertiaryContainer
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
@@ -41,13 +49,13 @@ fun GiFelineHome(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = stringResource(R.string.home_title),
+                text = stringResource(Res.string.home_title),
                 style = MaterialTheme.typography.displayLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
-                text = stringResource(R.string.home_sub_title),
+                text = stringResource(Res.string.home_sub_title),
                 style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -64,7 +72,7 @@ fun GiFelineHome(
                 .padding(8.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.home_search_breeds_body),
+                text = stringResource(Res.string.home_search_breeds_body),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
@@ -77,7 +85,7 @@ fun GiFelineHome(
                 onClick = onNavigateToBreedSearch,
             ) {
                 Text(
-                    text = stringResource(R.string.home_search_breeds_action),
+                    text = stringResource(Res.string.home_search_breeds_action),
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                 )
@@ -91,7 +99,7 @@ fun GiFelineHome(
                 .padding(8.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.home_select_breed_body),
+                text = stringResource(Res.string.home_select_breed_body),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
@@ -104,7 +112,7 @@ fun GiFelineHome(
                 onClick = onNavigateToBreedSelector,
             ) {
                 Text(
-                    text = stringResource(R.string.home_select_breed_action),
+                    text = stringResource(Res.string.home_select_breed_action),
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                 )
@@ -115,13 +123,13 @@ fun GiFelineHome(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = stringResource(R.string.home_small_print),
+                text = stringResource(Res.string.home_small_print),
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
-                text = stringResource(R.string.home_copyright),
+                text = stringResource(Res.string.home_copyright),
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground,

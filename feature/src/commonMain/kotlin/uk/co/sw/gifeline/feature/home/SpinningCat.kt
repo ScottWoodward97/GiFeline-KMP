@@ -17,11 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import uk.co.sw.gifeline.feature.R
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.cat
+import org.jetbrains.compose.resources.painterResource
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @Composable
@@ -52,7 +53,7 @@ fun SpinningCat(size: Dp) {
     )
     Box(Modifier.size(size * 1.25f), contentAlignment = Alignment.Center) {
         Icon(
-            painter = painterResource(id = R.drawable.cat),
+            painter = painterResource(Res.drawable.cat),
             contentDescription = null,
             modifier = Modifier
                 .rotate(rotation)

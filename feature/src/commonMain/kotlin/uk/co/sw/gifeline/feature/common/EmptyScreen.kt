@@ -13,11 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import uk.co.sw.gifeline.feature.R
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.empty_screen_message
+import org.jetbrains.compose.resources.stringResource
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
 @Composable
@@ -38,7 +39,7 @@ fun EmptyScreen(
             modifier = Modifier.size(64.dp)
         )
         Text(
-            text = stringResource(R.string.empty_screen_message),
+            text = stringResource(Res.string.empty_screen_message),
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center,
         )

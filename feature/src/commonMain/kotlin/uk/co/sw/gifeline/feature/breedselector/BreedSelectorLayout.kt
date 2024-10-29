@@ -16,12 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import uk.co.sw.gifeline.feature.R
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.breed_alt_name_fmt
+import org.jetbrains.compose.resources.stringResource
 import uk.co.sw.gifeline.feature.breedselector.preview.BreedPreviewParameterProvider
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState.CatBreeds.CatBreedViewData
@@ -93,7 +94,7 @@ private fun Breed(
             if (breed.altNames.isNotEmpty()) {
                 Text(
                     text = stringResource(
-                        id = R.string.breed_alt_name_fmt,
+                        Res.string.breed_alt_name_fmt,
                         breed.altNames.joinToString(", ")
                     ),
                     style = MaterialTheme.typography.bodySmall,

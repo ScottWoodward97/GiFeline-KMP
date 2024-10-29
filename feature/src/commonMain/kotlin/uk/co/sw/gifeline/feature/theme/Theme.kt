@@ -29,7 +29,7 @@ fun GiFelineTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = giFelineTypography(),
         content = content
     )
 }
