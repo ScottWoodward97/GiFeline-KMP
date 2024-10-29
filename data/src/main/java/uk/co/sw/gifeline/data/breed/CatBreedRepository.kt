@@ -1,12 +1,12 @@
 package uk.co.sw.gifeline.data.breed
 
-import uk.co.sw.gifeline.data.common.KtorRepository
+import uk.co.sw.gifeline.data.common.Repository
 import uk.co.sw.gifeline.data.common.response.ApiResponse
 import javax.inject.Inject
 
 class CatBreedRepository @Inject constructor(
     private val catBreedService: CatBreedService
-) : KtorRepository() {
+) : Repository() {
 
     suspend fun getCatBreeds(): ApiResponse<List<CatBreedEntity>> {
         return handleResponse { catBreedService.getAllBreeds() }
