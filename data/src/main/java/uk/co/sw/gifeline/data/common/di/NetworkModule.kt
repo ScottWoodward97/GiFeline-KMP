@@ -14,37 +14,11 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import uk.co.sw.gifeline.data.common.interceptor.ApiKeyInterceptor
 
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
-
-    @CatRetrofit
-    @Provides
-    fun provideCatRetrofit(
-        @CatOkHttp okHttpClient: OkHttpClient,
-        @CatBaseUrl baseUrl: String
-    ): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-    }
-
-    @CatOkHttp
-    @Provides
-    fun provideOkHttpClient(
-        apiKeyInterceptor: ApiKeyInterceptor,
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(apiKeyInterceptor)
-            .build()
-    }
 
     @CatBaseUrl
     @Provides

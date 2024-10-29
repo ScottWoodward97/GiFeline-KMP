@@ -10,8 +10,6 @@ composeBom = "2024.10.00"
 appcompat = "1.7.0"
 hilt = "2.49"
 navigation = "2.8.3"
-retrofit = "2.11.0"
-moshi = "1.15.1"
 turbine = "1.1.0"
 coil = "2.6.0"
 uiTextGoogleFonts = "1.7.4"
@@ -38,11 +36,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-retrofit-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
-moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
-moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine"}
 coil = {group = "io.coil-kt", name="coil", version.ref = "coil"}
 coil-compose = {group = "io.coil-kt", name="coil-compose", version.ref = "coil"}
@@ -108,10 +101,6 @@ data = [
     "coroutines-core",
     "coroutines-android",
     "dagger-hilt",
-    "retrofit",
-    "retrofit-moshi",
-    "moshi",
-    "moshi-kotlin",
     "ktor-client-core",
     "ktor-client-okhttp",
     "kotlinx-serialization",
@@ -121,7 +110,6 @@ data = [
 ]
 data-kapt = [
     "dagger-hilt-compiler",
-    "moshi-codegen",
 ]
 data-test = [
     "ktor-client-mock",
