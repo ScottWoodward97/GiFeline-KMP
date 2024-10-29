@@ -10,9 +10,7 @@ class GiFelineActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GiFelineTheme {
-                GiFelineScreen()
-            }
+            App()
         }
     }
 }

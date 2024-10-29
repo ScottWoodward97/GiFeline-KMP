@@ -67,14 +67,20 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 
 [bundles]
 app = [
-    "androidx-appcompat",
-    "androidx-activity-compose",
     "kotlin",
     "koin",
     "koin-annotations",
 ]
+app-android = [
+    "androidx-appcompat",
+    "androidx-activity-compose",
+]
 app-ksp = [
     "koin-compiler",
+]
+app-debug = [
+    "androidx-ui-tooling",
+    "androidx-ui-tooling-preview",
 ]
 feature = [
     "kotlin",
