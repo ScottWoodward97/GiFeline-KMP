@@ -1,22 +1,27 @@
 package uk.co.sw.gifeline.feature.breedprofile.viewstate
 
-import android.content.res.Resources
+import gifeline.feature.generated.resources.Res
+import gifeline.feature.generated.resources.breed_profile_state_energy_title
+import gifeline.feature.generated.resources.breed_profile_state_intelligence_title
+import gifeline.feature.generated.resources.breed_profile_state_vocalisation_title
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import uk.co.sw.gifeline.domain.breed.CatBreed
 import uk.co.sw.gifeline.domain.images.CatImage
-import uk.co.sw.gifeline.feature.R
 import uk.co.sw.gifeline.feature.breedprofile.viewstate.BreedProfileViewState.Profile.Stat
+import uk.co.sw.gifeline.feature.common.ResourceStringProvider
 
 class BreedProfileViewDataMapperTest {
 
-    private val mockResources: Resources = mockk()
+    private val mockResources: ResourceStringProvider = mockk()
 
     private lateinit var mapper: BreedProfileViewDataMapper
 
@@ -31,7 +36,7 @@ class BreedProfileViewDataMapperTest {
     }
 
     @Test
-    fun `Given breed and images, When mapped, Then return view data`() {
+    fun `Given breed and images, When mapped, Then return view data`() = runTest {
         // Given
         val mockImage: CatImage = mockk { every { url } returns "imageUrl" }
         val mockBreed = CatBreed(
@@ -45,14 +50,14 @@ class BreedProfileViewDataMapperTest {
             stats = CatBreed.Stats(energyLevel = 1, intelligence = 2, vocalisation = 3),
             wikiUrl = "wikiUrl"
         )
-        every {
-            mockResources.getString(R.string.breed_profile_state_energy_title)
+        coEvery {
+            mockResources.getResourceString(Res.string.breed_profile_state_energy_title)
         } returns "Energy"
-        every {
-            mockResources.getString(R.string.breed_profile_state_intelligence_title)
+        coEvery {
+            mockResources.getResourceString(Res.string.breed_profile_state_intelligence_title)
         } returns "Intelligence"
-        every {
-            mockResources.getString(R.string.breed_profile_state_vocalisation_title)
+        coEvery {
+            mockResources.getResourceString(Res.string.breed_profile_state_vocalisation_title)
         } returns "Vocalisation"
 
         // When
@@ -79,9 +84,9 @@ class BreedProfileViewDataMapperTest {
             assertStat(get(2), "Vocalisation", 3)
         }
         assertThat(result.wikiUrl).isEqualTo("wikiUrl")
-        verify { mockResources.getString(R.string.breed_profile_state_energy_title) }
-        verify { mockResources.getString(R.string.breed_profile_state_intelligence_title) }
-        verify { mockResources.getString(R.string.breed_profile_state_vocalisation_title) }
+        coVerify { mockResources.getResourceString(Res.string.breed_profile_state_energy_title) }
+        coVerify { mockResources.getResourceString(Res.string.breed_profile_state_intelligence_title) }
+        coVerify { mockResources.getResourceString(Res.string.breed_profile_state_vocalisation_title) }
     }
 
 }

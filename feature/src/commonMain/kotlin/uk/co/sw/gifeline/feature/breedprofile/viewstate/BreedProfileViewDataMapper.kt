@@ -4,11 +4,13 @@ import gifeline.feature.generated.resources.Res
 import gifeline.feature.generated.resources.breed_profile_state_energy_title
 import gifeline.feature.generated.resources.breed_profile_state_intelligence_title
 import gifeline.feature.generated.resources.breed_profile_state_vocalisation_title
-import org.jetbrains.compose.resources.getString
 import uk.co.sw.gifeline.domain.breed.CatBreed
 import uk.co.sw.gifeline.domain.images.CatImage
+import uk.co.sw.gifeline.feature.common.ResourceStringProvider
 
-class BreedProfileViewDataMapper {
+class BreedProfileViewDataMapper(
+    private val resources: ResourceStringProvider,
+) {
 
     private companion object {
         const val STAT_MAX: Int = 5
@@ -27,17 +29,17 @@ class BreedProfileViewDataMapper {
             stats = with(breed.stats) {
                 listOf(
                     BreedProfileViewState.Profile.Stat(
-                        name = getString(Res.string.breed_profile_state_energy_title),
+                        name = resources.getResourceString(Res.string.breed_profile_state_energy_title),
                         score = energyLevel,
                         max = STAT_MAX
                     ),
                     BreedProfileViewState.Profile.Stat(
-                        name = getString(Res.string.breed_profile_state_intelligence_title),
+                        name = resources.getResourceString(Res.string.breed_profile_state_intelligence_title),
                         score = intelligence,
                         max = STAT_MAX
                     ),
                     BreedProfileViewState.Profile.Stat(
-                        name = getString(Res.string.breed_profile_state_vocalisation_title),
+                        name = resources.getResourceString(Res.string.breed_profile_state_vocalisation_title),
                         score = vocalisation,
                         max = STAT_MAX
                     ),
