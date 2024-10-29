@@ -1,18 +1,20 @@
 package uk.co.sw.gifeline.data.breed.di
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
+import uk.co.sw.gifeline.data.breed.CatBreedRepository
 import uk.co.sw.gifeline.data.breed.CatBreedService
 import uk.co.sw.gifeline.data.breed.CatBreedServiceImpl
-import uk.co.sw.gifeline.data.common.di.NetworkModule
+import uk.co.sw.gifeline.data.common.di.networkModule
 
-@InstallIn(ViewModelComponent::class)
-@Module(includes = [NetworkModule::class])
-abstract class CatBreedModule {
+internal val breedModule = module {
+    includes(networkModule)
 
-    @Binds
-    abstract fun bindsCatBreedService(serviceImpl: CatBreedServiceImpl): CatBreedService
+    single<CatBreedService> {
+        CatBreedServiceImpl(
+            get(named("CatKtor"))
+        )
+    }
 
+    factory { CatBreedRepository(get()) }
 }

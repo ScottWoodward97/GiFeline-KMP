@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import uk.co.sw.gifeline.feature.breedselector.preview.BreedPreviewParameterProvider
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
@@ -27,7 +27,7 @@ import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 fun BreedSearchScreen(
     onBreedSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: BreedSearchViewModel = hiltViewModel(),
+    viewModel: BreedSearchViewModel = koinViewModel(),
 ) {
     val state = viewModel.breeds.collectAsState()
     BreedSearchLayout(

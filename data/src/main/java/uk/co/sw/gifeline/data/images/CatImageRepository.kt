@@ -2,9 +2,8 @@ package uk.co.sw.gifeline.data.images
 
 import uk.co.sw.gifeline.data.common.Repository
 import uk.co.sw.gifeline.data.common.response.ApiResponse
-import javax.inject.Inject
 
-class CatImageRepository @Inject constructor(
+class CatImageRepository(
     private val catImagesService: CatImagesService,
 ) : Repository() {
 

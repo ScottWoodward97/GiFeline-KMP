@@ -4,11 +4,9 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import uk.co.sw.gifeline.data.common.di.CatKtor
-import javax.inject.Inject
 
-class CatImagesServiceImpl @Inject constructor(
-    @CatKtor private val client: HttpClient,
+class CatImagesServiceImpl(
+    private val client: HttpClient,
 ) : CatImagesService {
 
     override suspend fun getImages(
