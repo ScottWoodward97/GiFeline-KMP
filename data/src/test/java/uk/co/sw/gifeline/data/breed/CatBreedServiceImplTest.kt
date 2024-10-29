@@ -1,15 +1,12 @@
 package uk.co.sw.gifeline.data.breed
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.mock.MockEngine
-import io.ktor.client.engine.mock.respondBadRequest
-import io.ktor.client.engine.mock.respondOk
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Parameters
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Assert.fail
 import org.junit.Test
+import uk.co.sw.gifeline.data.MockEngineBuilder.createMockEngine
 
 class CatBreedServiceImplTest {
 
@@ -71,36 +68,5 @@ class CatBreedServiceImplTest {
             assertThat(status.value).isEqualTo(200)
             assertThat(bodyAsText()).isEqualTo("findBreed")
         }
-
     }
-
-    private fun createMockEngine(expectedPath: String, response: String): MockEngine {
-        return MockEngine { request ->
-            if (request.url.encodedPath == expectedPath) {
-                respondOk(response)
-            } else {
-                fail("Incorrect request path called: ${request.url.encodedPath}")
-                respondBadRequest()
-            }
-        }
-    }
-
-    private fun createMockEngine(
-        expectedPath: String,
-        expectedParameters: Parameters,
-        response: String
-    ): MockEngine {
-        return MockEngine { request ->
-            if (request.url.encodedPath == expectedPath && request.url.parameters.entries()
-                    .containsAll(expectedParameters.entries())
-            ) {
-                respondOk(response)
-            } else {
-                fail("Incorrect request path called: ${request.url.encodedPath}\n" +
-                        "With parameters: ${request.url.parameters}")
-                respondBadRequest()
-            }
-        }
-    }
-
 }
