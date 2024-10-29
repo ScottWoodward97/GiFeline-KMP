@@ -1,23 +1,23 @@
 package uk.co.sw.gifeline.data.breed
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class CatBreedEntity(
     val id: String,
     val name: String,
-    @Json(name = "alt_names") val altNames: String?,
+    @SerialName("alt_names") val altNames: String?,
     val origin: String,
     val description: String,
-    @Json(name = "life_span") val lifeSpan: String,
+    @SerialName("life_span") val lifeSpan: String,
     val weight: Weight,
-    @Json(name = "energy_level") val energyLevel: Int,
+    @SerialName("energy_level") val energyLevel: Int,
     val intelligence: Int,
     val vocalisation: Int,
-    @Json(name = "wikipedia_url") val wikiUrl: String?,
+    @SerialName("wikipedia_url") val wikiUrl: String?,
 ) {
-    @JsonClass(generateAdapter = true)
+    @Serializable
     data class Weight(
         val imperial: String,
         val metric: String,

@@ -1,23 +1,13 @@
 package uk.co.sw.gifeline.data.breed
 
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import io.ktor.client.statement.HttpResponse
 
 interface CatBreedService {
 
-    @GET("v1/breeds")
-    suspend fun getAllBreeds(): Response<List<CatBreedEntity>>
+    suspend fun getAllBreeds(): HttpResponse
 
-    @GET("v1/breeds/search")
-    suspend fun searchBreeds(
-        @Query("q") searchTerm: String,
-    ): Response<List<CatBreedEntity>>
+    suspend fun searchBreeds(searchTerm: String): HttpResponse
 
-    @GET("v1/breeds/{breedId}")
-    suspend fun findBreed(
-        @Path("breedId") searchTerm: String,
-    ): Response<CatBreedEntity>
+    suspend fun findBreed(breedId: String): HttpResponse
 
 }
