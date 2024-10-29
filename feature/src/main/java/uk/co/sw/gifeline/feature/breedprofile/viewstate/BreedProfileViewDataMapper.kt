@@ -4,9 +4,8 @@ import android.content.res.Resources
 import uk.co.sw.gifeline.domain.breed.CatBreed
 import uk.co.sw.gifeline.domain.images.CatImage
 import uk.co.sw.gifeline.feature.R
-import javax.inject.Inject
 
-class BreedProfileViewDataMapper @Inject constructor(
+class BreedProfileViewDataMapper(
     private val resources: Resources,
 ) {
 

@@ -1,18 +1,18 @@
 package uk.co.sw.gifeline.data.images.di
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import uk.co.sw.gifeline.data.common.di.NetworkModule
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
+import uk.co.sw.gifeline.data.common.di.networkModule
+import uk.co.sw.gifeline.data.images.CatImageRepository
 import uk.co.sw.gifeline.data.images.CatImagesService
 import uk.co.sw.gifeline.data.images.CatImagesServiceImpl
 
-@InstallIn(ViewModelComponent::class)
-@Module(includes = [NetworkModule::class])
-abstract class CatImageModule {
+internal val imageModule = module {
+    includes(networkModule)
 
-    @Binds
-    abstract fun bindsCatImageService(impl: CatImagesServiceImpl): CatImagesService
+    single<CatImagesService> {
+        CatImagesServiceImpl(get(named("CatKtor")))
+    }
 
+    factory { CatImageRepository(get()) }
 }

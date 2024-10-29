@@ -8,13 +8,12 @@ assertj = "3.11.1"
 activityCompose = "1.9.3"
 composeBom = "2024.10.00"
 appcompat = "1.7.0"
-hilt = "2.49"
 navigation = "2.8.3"
 turbine = "1.1.0"
 coil = "2.6.0"
 uiTextGoogleFonts = "1.7.4"
 ktor = "3.0.0"
-koin = "3.5.6"
+koin = "4.0.0"
 koinAnnotation = "1.3.1"
 ksp = "2.0.21-1.0.26"
 
@@ -28,7 +27,6 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 assertJ = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
-androidx-navigation-compose-hilt = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
@@ -37,8 +35,6 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine"}
 coil = {group = "io.coil-kt", name="coil", version.ref = "coil"}
 coil-compose = {group = "io.coil-kt", name="coil-compose", version.ref = "coil"}
@@ -56,14 +52,15 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 koin = { group = "io.insert-koin", name = "koin-android", version.ref="koin"}
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref="koinAnnotation"}
 koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref="koinAnnotation"}
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref="koin"}
+koin-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref="koin"}
+koin-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref="koin"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsKotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = {id = "com.google.devtools.ksp", version.ref="ksp"}
 
@@ -72,12 +69,10 @@ app = [
     "androidx-appcompat",
     "androidx-activity-compose",
     "kotlin",
-    "dagger-hilt",
     "koin",
     "koin-annotations",
 ]
 app-ksp = [
-    "dagger-hilt-compiler",
     "koin-compiler",
 ]
 feature = [
@@ -89,15 +84,15 @@ feature = [
     "androidx-ui-text-google-fonts",
     "androidx-material3",
     "androidx-navigation-compose",
-    "androidx-navigation-compose-hilt",
-    "dagger-hilt",
     "coil",
     "coil-compose",
     "koin",
     "koin-annotations",
+    "koin-compose",
+    "koin-viewmodel",
+    "koin-navigation",
 ]
 feature-ksp = [
-    "dagger-hilt-compiler",
     "koin-compiler",
 ]
 feature-debug = [
@@ -108,15 +103,16 @@ domain = [
     "kotlin",
     "coroutines-core",
     "coroutines-android",
-    "dagger-hilt",
     "koin",
     "koin-annotations",
+]
+domain-ksp = [
+    "koin-compiler",
 ]
 data = [
     "kotlin",
     "coroutines-core",
     "coroutines-android",
-    "dagger-hilt",
     "ktor-client-core",
     "ktor-client-okhttp",
     "kotlinx-serialization",
@@ -127,7 +123,6 @@ data = [
     "koin-annotations",
 ]
 data-ksp = [
-    "dagger-hilt-compiler",
     "koin-compiler",
 ]
 data-test = [

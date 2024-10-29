@@ -11,14 +11,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 
 @Composable
 fun BreedSelectorScreen(
     onBreedSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: BreedSelectorViewModel = hiltViewModel(),
+    viewModel: BreedSelectorViewModel = koinViewModel(),
 ) {
     val state: State<CatBreedViewState> = viewModel.breeds.collectAsState()
     LaunchedEffect(key1 = Unit) {

@@ -2,22 +2,21 @@ package uk.co.sw.gifeline.feature.breedselector
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import uk.co.sw.gifeline.domain.breed.CatBreed
 import uk.co.sw.gifeline.domain.breed.SearchCatBreedsUseCase
 import uk.co.sw.gifeline.domain.response.Result
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewDataMapper
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
-import javax.inject.Inject
 
-@HiltViewModel
-class BreedSearchViewModel @Inject constructor(
+@KoinViewModel
+class BreedSearchViewModel(
     private val getCatBreedsUseCase: SearchCatBreedsUseCase,
     private val catBreedViewDataMapper: CatBreedViewDataMapper,
 ) : ViewModel() {

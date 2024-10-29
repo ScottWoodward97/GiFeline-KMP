@@ -1,9 +1,5 @@
 package uk.co.sw.gifeline.data.common.di
 
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -14,25 +10,26 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import uk.co.sw.gifeline.data.common.interceptor.ApiKeyInterceptor
 
-@InstallIn(SingletonComponent::class)
-@Module
-object NetworkModule {
+internal val networkModule = module {
 
-    @CatBaseUrl
-    @Provides
-    fun provideBaseUrl(): String = "https://api.thecatapi.com/"
+    single<String>(
+        named("CatBaseUrl")
+    ) {
+        "https://api.thecatapi.com/"
+    }
 
-    @CatKtor
-    @Provides
-    fun provideCatHttpClient(
-        apiKeyInterceptor: ApiKeyInterceptor,
-        @CatBaseUrl baseUrl: String
-    ): HttpClient {
-        return HttpClient(OkHttp) {
+    factory { ApiKeyInterceptor() }
+
+    factory<HttpClient>(
+        named("CatKtor")
+    ) {
+        HttpClient(OkHttp) {
             engine {
-                addNetworkInterceptor(apiKeyInterceptor)
+                addNetworkInterceptor(get<ApiKeyInterceptor>())
             }
             install(ContentNegotiation) {
                 json(
@@ -49,7 +46,7 @@ object NetworkModule {
                 level = LogLevel.ALL
             }
             defaultRequest {
-                url(baseUrl)
+                url(get<String>(qualifier = named("CatBaseUrl")))
             }
         }
     }

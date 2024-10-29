@@ -2,9 +2,8 @@ package uk.co.sw.gifeline.data.breed
 
 import uk.co.sw.gifeline.data.common.Repository
 import uk.co.sw.gifeline.data.common.response.ApiResponse
-import javax.inject.Inject
 
-class CatBreedRepository @Inject constructor(
+class CatBreedRepository(
     private val catBreedService: CatBreedService
 ) : Repository() {
 

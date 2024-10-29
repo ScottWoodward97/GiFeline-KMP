@@ -3,19 +3,18 @@ package uk.co.sw.gifeline.feature.images
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import uk.co.sw.gifeline.domain.images.CatImage
 import uk.co.sw.gifeline.domain.images.GetCatImagesUseCase
 import uk.co.sw.gifeline.domain.response.Result
 import uk.co.sw.gifeline.feature.images.viewstate.CatImagesViewState
-import javax.inject.Inject
 
-@HiltViewModel
-class CatImagesViewModel @Inject constructor(
+@KoinViewModel
+class CatImagesViewModel(
     private val getCatImagesUseCase: GetCatImagesUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {

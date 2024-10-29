@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -42,5 +43,6 @@ dependencies {
     implementation(project(":data"))
 
     implementation(libs.bundles.domain)
+    ksp(libs.bundles.domain.ksp)
     testImplementation(libs.bundles.test)
 }

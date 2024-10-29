@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import uk.co.sw.gifeline.feature.common.ErrorScreen
 import uk.co.sw.gifeline.feature.common.LoadingScreen
 import uk.co.sw.gifeline.feature.images.viewstate.CatImagesViewState
@@ -26,7 +26,7 @@ import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 fun CatImagesScreen(
     onImageClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: CatImagesViewModel = hiltViewModel(),
+    viewModel: CatImagesViewModel = koinViewModel(),
 ) {
     LaunchedEffect(Unit) {
         viewModel.getImages()

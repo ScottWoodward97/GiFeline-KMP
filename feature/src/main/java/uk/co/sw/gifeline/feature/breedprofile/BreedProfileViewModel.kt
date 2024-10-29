@@ -3,11 +3,11 @@ package uk.co.sw.gifeline.feature.breedprofile
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import uk.co.sw.gifeline.domain.breed.CatBreed
 import uk.co.sw.gifeline.domain.breed.FindBreedUseCase
 import uk.co.sw.gifeline.domain.images.CatImage
@@ -15,10 +15,9 @@ import uk.co.sw.gifeline.domain.images.GetCatImagesUseCase
 import uk.co.sw.gifeline.domain.response.Result
 import uk.co.sw.gifeline.feature.breedprofile.viewstate.BreedProfileViewDataMapper
 import uk.co.sw.gifeline.feature.breedprofile.viewstate.BreedProfileViewState
-import javax.inject.Inject
 
-@HiltViewModel
-class BreedProfileViewModel @Inject constructor(
+@KoinViewModel
+class BreedProfileViewModel(
     private val findBreedUseCase: FindBreedUseCase,
     private val getImageUseCase: GetCatImagesUseCase,
     private val breedProfileViewDataMapper: BreedProfileViewDataMapper,

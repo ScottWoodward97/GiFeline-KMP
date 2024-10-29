@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import uk.co.sw.gifeline.feature.breedprofile.preview.BreedProfilePreviewParameterProvider
 import uk.co.sw.gifeline.feature.breedprofile.profile.BreedDescription
 import uk.co.sw.gifeline.feature.breedprofile.profile.BreedImageGallery
@@ -33,7 +33,7 @@ fun BreedProfileScreen(
     modifier: Modifier = Modifier,
     onNavigateToImage: (String) -> Unit,
     onNavigateToGallery: (String) -> Unit,
-    viewModel: BreedProfileViewModel = hiltViewModel(),
+    viewModel: BreedProfileViewModel = koinViewModel(),
 ) {
     val state = viewModel.profileViewState.collectAsState()
     LaunchedEffect(Unit) {
