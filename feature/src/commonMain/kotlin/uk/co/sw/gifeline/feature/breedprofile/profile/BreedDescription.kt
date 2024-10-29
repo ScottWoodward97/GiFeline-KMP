@@ -20,7 +20,7 @@ fun BreedDescription(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(R.string.breed_profile_description_title),
+            text = stringResource(Res.string.breed_profile_description_title),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
             fontWeight = FontWeight.Medium,
