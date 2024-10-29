@@ -12,7 +12,7 @@
     <string name="home_copyright">2024 © Belize</string>
 
     <!--Breed name -->
-    <string name="breed_alt_name_fmt">(%s)</string>
+    <string name="breed_alt_name_fmt">(%1$s)</string>
 
     <!-- Error Screen -->
     <string name="error_screen_message">Cat-astrophic Error!</string>
