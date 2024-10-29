@@ -14,6 +14,9 @@ turbine = "1.1.0"
 coil = "2.6.0"
 uiTextGoogleFonts = "1.7.4"
 ktor = "3.0.0"
+koin = "3.5.6"
+koinAnnotation = "1.3.1"
+ksp = "2.0.21-1.0.26"
 
 [libraries]
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -50,6 +53,10 @@ ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version="1.7.3" }
 
+koin = { group = "io.insert-koin", name = "koin-android", version.ref="koin"}
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref="koinAnnotation"}
+koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref="koinAnnotation"}
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -58,6 +65,7 @@ jetbrainsKotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = {id = "com.google.devtools.ksp", version.ref="ksp"}
 
 [bundles]
 app = [
@@ -65,9 +73,12 @@ app = [
     "androidx-activity-compose",
     "kotlin",
     "dagger-hilt",
+    "koin",
+    "koin-annotations",
 ]
-app-kapt = [
+app-ksp = [
     "dagger-hilt-compiler",
+    "koin-compiler",
 ]
 feature = [
     "kotlin",
@@ -81,10 +92,13 @@ feature = [
     "androidx-navigation-compose-hilt",
     "dagger-hilt",
     "coil",
-    "coil-compose"
+    "coil-compose",
+    "koin",
+    "koin-annotations",
 ]
-feature-kapt = [
+feature-ksp = [
     "dagger-hilt-compiler",
+    "koin-compiler",
 ]
 feature-debug = [
     "androidx-ui-tooling",
@@ -95,6 +109,8 @@ domain = [
     "coroutines-core",
     "coroutines-android",
     "dagger-hilt",
+    "koin",
+    "koin-annotations",
 ]
 data = [
     "kotlin",
@@ -107,9 +123,12 @@ data = [
     "ktor-client-negotiate",
     "ktor-client-serialization",
     "ktor-client-logging",
+    "koin",
+    "koin-annotations",
 ]
-data-kapt = [
+data-ksp = [
     "dagger-hilt-compiler",
+    "koin-compiler",
 ]
 data-test = [
     "ktor-client-mock",

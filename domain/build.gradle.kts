@@ -14,6 +14,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    sourceSets {
+        getByName("main") {
+            java.srcDir(File("build/generated/ksp/debug/kotlin"))
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.jetbrainsKotlinKapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -15,6 +15,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    sourceSets {
+        getByName("main") {
+            java.srcDir(File("build/generated/ksp/debug/kotlin"))
+        }
     }
 
     buildTypes {
@@ -37,7 +43,7 @@ android {
 
 dependencies {
     implementation(libs.bundles.data)
-    kapt(libs.bundles.data.kapt)
+    ksp(libs.bundles.data.ksp)
     testImplementation(libs.bundles.test)
     testImplementation(libs.bundles.data.test)
 }

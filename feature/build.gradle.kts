@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.jetbrainsKotlinKapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -17,6 +17,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    sourceSets {
+        getByName("main") {
+            java.srcDir(File("build/generated/ksp/debug/kotlin"))
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -26,6 +32,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,7 +50,7 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.feature)
-    kapt(libs.bundles.feature.kapt)
+    ksp(libs.bundles.feature.ksp)
     debugImplementation(libs.bundles.feature.debug)
     testImplementation(libs.bundles.test)
 }
