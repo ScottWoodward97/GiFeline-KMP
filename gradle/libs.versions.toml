@@ -109,9 +109,11 @@ feature-debug = [
 domain = [
     "kotlin",
     "coroutines-core",
-    "coroutines-android",
     "koin",
     "koin-annotations",
+]
+domain-android = [
+    "coroutines-android",
 ]
 domain-ksp = [
     "koin-compiler",

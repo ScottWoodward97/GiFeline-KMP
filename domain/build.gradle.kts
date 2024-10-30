@@ -1,7 +1,30 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.ksp)
+}
+
+kotlin {
+    androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
+    sourceSets {
+        androidMain.dependencies {
+            implementation(libs.bundles.domain.android)
+        }
+        commonMain.dependencies {
+            implementation(project(":data"))
+
+            implementation(libs.bundles.domain)
+        }
+    }
 }
 
 android {
@@ -31,18 +54,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
 dependencies {
-    implementation(project(":data"))
-
-    implementation(libs.bundles.domain)
     ksp(libs.bundles.domain.ksp)
     testImplementation(libs.bundles.test)
 }
