@@ -121,6 +121,9 @@ domain = [
 domain-android = [
     "coroutines-android",
 ]
+domain-desktop = [
+    "coroutines-swing",
+]
 domain-ksp = [
     "koin-compiler",
 ]

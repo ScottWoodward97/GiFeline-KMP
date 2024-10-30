@@ -14,8 +14,10 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+    jvm("desktop")
 
     sourceSets {
+        val desktopMain by getting
         androidMain.dependencies {
             implementation(libs.bundles.domain.android)
         }
@@ -23,6 +25,9 @@ kotlin {
             implementation(project(":data"))
 
             implementation(libs.bundles.domain)
+        }
+        desktopMain.dependencies {
+            implementation(libs.bundles.domain.desktop)
         }
     }
 }
