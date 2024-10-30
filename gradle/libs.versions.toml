@@ -119,15 +119,17 @@ domain-ksp = [
 data = [
     "kotlin",
     "coroutines-core",
-    "coroutines-android",
     "ktor-client-core",
-    "ktor-client-okhttp",
     "kotlinx-serialization",
     "ktor-client-negotiate",
     "ktor-client-serialization",
     "ktor-client-logging",
     "koin",
     "koin-annotations",
+]
+data-android = [
+    "coroutines-android",
+    "ktor-client-okhttp",
 ]
 data-ksp = [
     "koin-compiler",
