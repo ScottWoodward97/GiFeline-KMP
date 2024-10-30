@@ -9,3 +9,7 @@
 /misc.xml
 /vcs.xml
 /inspectionProfiles/Project_Default.xml
+/.name
+/deploymentTargetSelector.xml
+/runConfigurations.xml
+/artifacts/

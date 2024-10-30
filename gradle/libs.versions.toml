@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.1"
+agp = "8.3.2"
 kotlin = "2.0.20"
 coroutines = "1.9.0"
 junit = "4.13.2"
@@ -22,6 +22,8 @@ kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref =
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "coroutines" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 assertJ = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
@@ -48,7 +50,8 @@ ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version="1.7.3" }
 
-koin = { group = "io.insert-koin", name = "koin-android", version.ref="koin"}
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref="koin"}
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref="koin"}
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref="koinAnnotation"}
 koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref="koinAnnotation"}
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref="koin"}
@@ -69,7 +72,8 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 [bundles]
 app = [
     "kotlin",
-    "koin",
+    "koin-android",
+    "koin-core",
     "koin-annotations",
 ]
 app-android = [
@@ -93,7 +97,8 @@ feature = [
     "androidx-navigation-compose",
     "coil",
     "coil-compose",
-    "koin",
+    "koin-android",
+    "koin-core",
     "koin-annotations",
     "koin-compose",
     "koin-viewmodel",
@@ -109,7 +114,8 @@ feature-debug = [
 domain = [
     "kotlin",
     "coroutines-core",
-    "koin",
+    "koin-android",
+    "koin-core",
     "koin-annotations",
 ]
 domain-android = [
@@ -126,12 +132,17 @@ data = [
     "ktor-client-negotiate",
     "ktor-client-serialization",
     "ktor-client-logging",
-    "koin",
+    "koin-core",
     "koin-annotations",
+    "ktor-client-okhttp",
+
 ]
 data-android = [
     "coroutines-android",
-    "ktor-client-okhttp",
+    "koin-android",
+]
+data-desktop = [
+    "coroutines-swing",
 ]
 data-ksp = [
     "koin-compiler",

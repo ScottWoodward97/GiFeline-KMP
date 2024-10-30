@@ -15,13 +15,18 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+    jvm("desktop")
 
     sourceSets {
+        val desktopMain by getting
         androidMain.dependencies {
             implementation(libs.bundles.data.android)
         }
         commonMain.dependencies {
             implementation(libs.bundles.data)
+        }
+        desktopMain.dependencies {
+            implementation(libs.bundles.data.desktop)
         }
     }
 }
