@@ -1,7 +1,6 @@
 package uk.co.sw.gifeline.feature.breedprofile.profile
 
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,12 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import uk.co.sw.gifeline.feature.images.ShimmerImage
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BreedImageGallery(
     imageUrls: List<String>,

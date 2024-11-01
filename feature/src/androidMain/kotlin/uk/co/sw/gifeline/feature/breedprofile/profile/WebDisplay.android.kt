@@ -14,10 +14,10 @@ import androidx.compose.ui.viewinterop.AndroidView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WebBottomSheet(
+actual fun WebDisplay(
     url: String,
     onDismiss: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,

@@ -6,14 +6,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 import uk.co.sw.gifeline.domain.breed.CatBreed
 import uk.co.sw.gifeline.domain.breed.GetCatBreedsUseCase
 import uk.co.sw.gifeline.domain.response.Result
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewDataMapper
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 
-@KoinViewModel
 class BreedSelectorViewModel(
     private val getCatBreedsUseCase: GetCatBreedsUseCase,
     private val catBreedViewDataMapper: CatBreedViewDataMapper,

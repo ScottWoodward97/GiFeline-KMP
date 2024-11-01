@@ -1,6 +1,6 @@
 package uk.co.sw.gifeline.feature.breedselector.preview
 
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 
 class BreedPreviewParameterProvider :

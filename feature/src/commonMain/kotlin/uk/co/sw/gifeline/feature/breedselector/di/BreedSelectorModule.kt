@@ -1,6 +1,6 @@
 package uk.co.sw.gifeline.feature.breedselector.di
 
-import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import uk.co.sw.gifeline.feature.breedselector.BreedSearchViewModel
 import uk.co.sw.gifeline.feature.breedselector.BreedSelectorViewModel
@@ -10,11 +10,7 @@ internal val breedSelectorModule = module {
 
     factory { CatBreedViewDataMapper() }
 
-    viewModel {
-        BreedSearchViewModel(get(), get())
-    }
+    viewModelOf(::BreedSelectorViewModel)
 
-    viewModel {
-        BreedSelectorViewModel(get(), get())
-    }
+    viewModelOf(::BreedSearchViewModel)
 }

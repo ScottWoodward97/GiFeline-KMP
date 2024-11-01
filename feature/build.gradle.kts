@@ -1,6 +1,4 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -12,26 +10,6 @@ plugins {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        moduleName = "composeApp"
-//        browser {
-//            val rootDirPath = project.rootDir.path
-//            val projectDirPath = project.projectDir.path
-//            commonWebpackConfig {
-//                outputFileName = "composeApp.js"
-//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-//                    static = (static ?: mutableListOf()).apply {
-//                        // Serve sources to debug inside browser
-//                        add(rootDirPath)
-//                        add(projectDirPath)
-//                    }
-//                }
-//            }
-//        }
-//        binaries.executable()
-//    }
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -39,31 +17,31 @@ kotlin {
         }
     }
 
-//    jvm("desktop")
-
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//        iosSimulatorArm64()
-//    ).forEach { iosTarget ->
-//        iosTarget.binaries.framework {
-//            baseName = "ComposeApp"
-//            isStatic = true
-//        }
-//    }
+    jvm("desktop")
 
     sourceSets {
-//        val desktopMain by getting
-
+        val desktopMain by getting
+        androidMain.dependencies {
+            implementation(libs.bundles.feature.android)
+        }
         commonMain.dependencies {
             implementation(project(":domain"))
-            implementation(libs.bundles.feature)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
             implementation(compose.components.resources)
+            implementation(compose.preview)
+            implementation(compose.uiTooling)
+            implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.bundles.feature)
+            api(libs.koin.core)
         }
-//        desktopMain.dependencies {
-//            implementation(compose.desktop.currentOs)
-//            implementation(libs.kotlinx.coroutines.swing)
-//        }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.bundles.feature.desktop)
+        }
     }
 }
 
@@ -104,8 +82,7 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
     ksp(libs.bundles.feature.ksp)
-    debugImplementation(libs.bundles.feature.debug)
+    debugImplementation(compose.uiTooling)
     testImplementation(libs.bundles.test)
 }
