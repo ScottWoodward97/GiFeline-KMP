@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import gifeline.feature.generated.resources.Res
 import gifeline.feature.generated.resources.breed_profile_wiki_body
@@ -25,6 +24,7 @@ import gifeline.feature.generated.resources.breed_profile_wiki_title
 import gifeline.feature.generated.resources.ic_open_link
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import uk.co.sw.gifeline.feature.common.tertiaryContainer
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
@@ -67,7 +67,7 @@ fun BreedWiki(
             )
         }
         if (isSheetOpen) {
-            WebBottomSheet(url = url, onDismiss = { isSheetOpen = false })
+            WebDisplay(url = url, onDismiss = { isSheetOpen = false })
         }
     }
 }

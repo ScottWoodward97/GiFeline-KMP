@@ -1,5 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -7,51 +7,20 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        moduleName = "composeApp"
-//        browser {
-//            val rootDirPath = project.rootDir.path
-//            val projectDirPath = project.projectDir.path
-//            commonWebpackConfig {
-//                outputFileName = "composeApp.js"
-//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-//                    static = (static ?: mutableListOf()).apply {
-//                        // Serve sources to debug inside browser
-//                        add(rootDirPath)
-//                        add(projectDirPath)
-//                    }
-//                }
-//            }
-//        }
-//        binaries.executable()
-//    }
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
-//    jvm("desktop")
-
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//        iosSimulatorArm64()
-//    ).forEach { iosTarget ->
-//        iosTarget.binaries.framework {
-//            baseName = "ComposeApp"
-//            isStatic = true
-//        }
-//    }
+    jvm("desktop")
 
     sourceSets {
-//        val desktopMain by getting
+        val desktopMain by getting
 
         androidMain.dependencies {
             implementation(libs.bundles.app.android)
@@ -62,11 +31,13 @@ kotlin {
             implementation(project(":data"))
 
             implementation(libs.bundles.app)
+            implementation(compose.preview)
+            implementation(compose.uiTooling)
+            implementation(compose.components.uiToolingPreview)
         }
-//        desktopMain.dependencies {
-//            implementation(compose.desktop.currentOs)
-//            implementation(libs.kotlinx.coroutines.swing)
-//        }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
     }
 }
 
@@ -118,7 +89,17 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    debugImplementation(libs.bundles.app.debug)
     ksp(libs.bundles.app.ksp)
+}
+
+compose.desktop {
+    application {
+        mainClass = "uk.co.sw.gifeline.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "uk.co.sw.gifeline"
+            packageVersion = "1.0.0"
+        }
+    }
 }

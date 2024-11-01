@@ -1,6 +1,5 @@
 package uk.co.sw.gifeline.feature.images
 
-import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,8 +13,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import uk.co.sw.gifeline.feature.common.ErrorScreen
 import uk.co.sw.gifeline.feature.common.LoadingScreen
@@ -85,7 +84,6 @@ private fun CatImagesState(
 }
 
 @Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ImageStatePreview() {
     GiFelineTheme {

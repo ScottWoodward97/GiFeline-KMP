@@ -1,6 +1,5 @@
 package uk.co.sw.gifeline.feature.breedselector
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,12 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import gifeline.feature.generated.resources.Res
 import gifeline.feature.generated.resources.breed_alt_name_fmt
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import uk.co.sw.gifeline.feature.breedselector.preview.BreedPreviewParameterProvider
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState
 import uk.co.sw.gifeline.feature.breedselector.viewstate.CatBreedViewState.CatBreeds.CatBreedViewData
@@ -106,7 +105,6 @@ private fun Breed(
 }
 
 @Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun BreedSelectorLayoutPreview(
     @PreviewParameter(BreedPreviewParameterProvider::class) cats: List<CatBreedViewData>

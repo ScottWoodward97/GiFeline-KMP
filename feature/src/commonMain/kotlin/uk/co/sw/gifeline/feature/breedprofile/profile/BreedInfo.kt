@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import gifeline.feature.generated.resources.Res
 import gifeline.feature.generated.resources.breed_profile_info_gallery_title
 import gifeline.feature.generated.resources.breed_profile_info_lifespan_measure
@@ -29,6 +28,7 @@ import gifeline.feature.generated.resources.breed_profile_info_weight_title
 import gifeline.feature.generated.resources.ic_photo_gallery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import uk.co.sw.gifeline.feature.common.secondaryContainer
 import uk.co.sw.gifeline.feature.theme.GiFelineTheme
 
